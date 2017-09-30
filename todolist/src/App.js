@@ -12,7 +12,8 @@ class App extends Component {
       inputValue: '',
       listToDo: [],
       errorVisible: false,
-      visible: true
+      visible: true,
+      messageError: ''
     }
 
     this.handleClickAdd = this.handleClickAdd.bind(this)
@@ -31,9 +32,17 @@ class App extends Component {
    * When clicking to Add Button
    * Comparing if the element exists before adding it to the list
    * If the element exists we show error message
+   * If the element not exist we add it to the list and then we send to backend Js
    */
   handleClickAdd() {
 
+    if(this.state.inputValue=='') {
+      this.setState({
+        errorVisible: true,
+        messageError: 'Le champs est vide'
+      })
+    }
+    else
     if (!this.state.listToDo.includes(this.state.inputValue)) {
       let list = this.state.listToDo
       list.push(this.state.inputValue)
@@ -42,10 +51,21 @@ class App extends Component {
         listToDo: list
       })
 
+      //Send data to koa 
+      fetch('http://localhost:3001/todos/'+this.state.inputValue)
+      .then(result => {
+          return result.json()
+      }).then(data => {
+    
+      }).catch((error) => {
+          console.error(error);
+      });
+
     }
     else {
       this.setState({
-        errorVisible: true
+        errorVisible: true,
+        messageError: 'le todo existe dejà !'
       })
     }
 
@@ -70,6 +90,8 @@ class App extends Component {
      */
     var list = this.state.listToDo.map((element) =>
       <ListGroupItem>
+        <Input addon type="checkbox" />
+        &nbsp;
         {element}
       </ListGroupItem>
     )
@@ -106,7 +128,7 @@ class App extends Component {
             <Row>
               <Col md={{ size: 6, offset: 3 }}>
                 <Alert color="danger" isOpen={this.state.visible} toggle={this.onDismiss}>
-                  todo existe déjà !
+                  {this.state.messageError}
                 </Alert>
               </Col>
             </Row>

@@ -2,8 +2,9 @@
 ![Vates](https://vates.fr/assets/main_logo_crop.png "Vates")
 
 The first project __todolist__ is developped with __reactstrap__ 
-Download it, in the root folder type : > __yarn install__ and then __yarn start__
+Clone it, in the root folder type : > __yarn install__ and then __yarn start__
 
 the second project __koa-app-back-end__ is developped by __node-js__
+Clone it in the root folder type : > __npm install__ and then __npm start__
 
 
