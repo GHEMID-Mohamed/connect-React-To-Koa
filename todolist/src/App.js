@@ -66,9 +66,8 @@ class App extends Component {
       this.setState({
         errorVisible: true,
         messageError: 'le todo existe dejà !'
-      })
-      console.log('hello world')
-      console.log('hello world')
+      }) 
+      console.log('hello my world') 
     }
 
   }
