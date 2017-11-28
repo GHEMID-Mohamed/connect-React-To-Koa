@@ -85,6 +85,8 @@ class App extends Component {
 
   render() {
 
+    console.log('hello world')
+
     /**
      * Mapping the array and modifying it's elements
      */
